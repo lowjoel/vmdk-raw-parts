@@ -83,7 +83,7 @@ class Partitioning(object):
         return str(buf)
        
     def __init__(self, diskpath):
-        disk = open(diskpath)
+        disk = open(diskpath, 'rb')
         try:
             self.mbr = disk.read(Partitioning.BLOCK)
             if self.mbr[510:512] != "\x55\xAA":
@@ -136,7 +136,7 @@ class PartitionedVMDK(object):
                 os.setuid(olduid)
     
     def writefile(self, dir, name, contents):
-        f = open(os.path.join(dir, name), 'w')
+        f = open(os.path.join(dir, name), 'wb')
         f.write(contents)
         f.close()
     
